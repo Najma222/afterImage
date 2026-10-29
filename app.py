@@ -5,6 +5,7 @@ import requests
 app = Flask(__name__)
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma3:1b")
+OLLAMA_TIMEOUT = float(os.getenv("OLLAMA_TIMEOUT", "90"))
 ALLOWED_TONES = {"nostalgic": "Nostalgic", "eerie": "Eerie", "hopeful": "Hopeful"}
 MAX_FRAGMENTS = 15
 MAX_FRAGMENT_LENGTH = 160
@@ -80,7 +81,7 @@ def reconstruct():
                 ],
                 "options": {"temperature": 0.7, "num_predict": 180},
             },
-            timeout=35,
+            timeout=OLLAMA_TIMEOUT,
         )
         response.raise_for_status()
         result = response.json()
