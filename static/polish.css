@@ -1,0 +1,237 @@
+:root {
+  --glow: 0 0 28px #64e6d21c;
+  --panel-border: #30485d;
+}
+
+body {
+  background: radial-gradient(circle at 50% -12%, #203951 0, #0b1020 38%, #070912 75%);
+}
+
+.terminal-shell {
+  position: relative;
+  overflow: hidden;
+  border-color: #46647a;
+  box-shadow: 0 0 0 5px #0b101b, 0 0 45px #64e6d20d, 0 24px 80px #000b;
+}
+
+.terminal-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);
+  opacity: .8;
+}
+
+.terminal-header {
+  background: linear-gradient(90deg, #101a2a, #0a0f1b 70%);
+}
+
+.header-status {
+  padding: 7px 10px;
+  border: 1px solid #263a4c;
+  background: #080d17;
+  font-size: 9px;
+  letter-spacing: .8px;
+}
+
+.boot-screen {
+  min-height: 680px;
+  padding-top: 38px;
+}
+
+.hero-name {
+  margin: 8px 0 -4px;
+  color: var(--ink) !important;
+  font-size: clamp(18px, 3vw, 28px) !important;
+  font-weight: 900;
+  letter-spacing: 7px !important;
+  text-shadow: 0 0 18px #64e6d244;
+}
+
+.hero-name span {
+  color: var(--violet);
+}
+
+.boot-screen h1 {
+  margin: 14px 0 18px;
+  text-shadow: 0 0 24px #a78bfa24;
+}
+
+.crt-ghost-stage {
+  filter: drop-shadow(0 0 18px #64e6d21b);
+}
+
+.crt-monitor {
+  border-color: #7890a3;
+  background: linear-gradient(145deg, #26374a, #111b2b);
+}
+
+.crt-screen {
+  background: radial-gradient(circle at 48% 45%, #20525b, #091321 72%);
+}
+
+.pixel-button {
+  min-height: 46px;
+  letter-spacing: .8px;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+
+.pixel-button:hover {
+  filter: brightness(1.08);
+}
+
+.pixel-button:focus-visible,
+.quiet-button:focus-visible,
+.example-chip:focus-visible,
+.tone-option input:focus-visible + span {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+
+.input-panel {
+  margin: 0 55px 50px;
+  padding: 24px 24px 26px;
+  border: 1px solid var(--panel-border);
+  background: linear-gradient(145deg, #111a2b, #0b101c);
+  box-shadow: var(--glow);
+}
+
+#memory-form {
+  padding: 0;
+}
+
+.input-panel textarea {
+  min-height: 172px;
+  background: #070c16;
+  border-color: #385066;
+}
+
+.input-panel textarea::placeholder {
+  color: #607785;
+  opacity: 1;
+}
+
+.example-chip {
+  background: #0e1724;
+}
+
+.tone-option span {
+  background: #0c1421;
+  border-color: #30465a;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.tone-option:hover span {
+  border-color: #6a8b9a;
+  background: #101c2c;
+}
+
+.tone-option input:checked + span {
+  background: #102b31;
+  box-shadow: inset 4px 0 var(--cyan), 0 0 18px #64e6d214;
+}
+
+.reconstruct-button {
+  width: 100%;
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  box-shadow: 6px 6px 0 var(--violet);
+}
+
+.form-message {
+  padding: 8px 10px;
+  border-left: 2px solid var(--red);
+  background: #2a1522;
+}
+
+.form-message:empty {
+  display: none;
+}
+
+.loading-state {
+  background: #111527;
+  box-shadow: var(--glow);
+}
+
+.memory-card {
+  background: linear-gradient(145deg, #142235, #0d1623);
+  box-shadow: 10px 10px 0 #0008, 0 0 28px #64e6d214;
+}
+
+.memory-card::after {
+  content: "SIGNAL STABLE";
+  position: absolute;
+  right: 16px;
+  top: -9px;
+  padding: 2px 6px;
+  background: var(--cyan);
+  color: var(--void);
+  font: 700 8px "Courier New";
+  letter-spacing: 1px;
+}
+
+.memory-output {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: auto;
+  text-shadow: 0 0 10px #e9f5f11c;
+}
+
+.result-actions .pixel-button {
+  box-shadow: 4px 4px 0 var(--violet);
+}
+
+.result-actions .quiet-button:hover,
+.terminal-footer button:hover {
+  border-color: var(--cyan);
+  color: var(--ink);
+}
+
+dialog {
+  box-shadow: 0 0 0 5px #0b101b, 0 18px 70px #000b;
+}
+
+@media (max-width: 700px) {
+  .brand-unit {
+    display: none;
+  }
+
+  .header-status {
+    padding: 6px;
+    font-size: 8px;
+  }
+
+  .boot-screen {
+    min-height: 620px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero-name {
+    letter-spacing: 4px !important;
+  }
+
+  .input-panel {
+    margin: 0 20px 35px;
+    padding: 18px 16px 20px;
+  }
+
+  .reconstruct-button {
+    font-size: 11px;
+  }
+
+  .memory-card::after {
+    right: 10px;
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-button,
+  .tone-option span {
+    transition: none;
+  }
+}

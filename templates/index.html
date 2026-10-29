@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050813">
+  <meta name="description" content="AFTERIMAGE.EXE: a local Gemma-powered digital-memory reconstruction terminal.">
+  <title>AFTERIMAGE.EXE // Ghost in the Machine</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='afterimage-reference-1') }}">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="top">
+      <div class="brand"><span class="mark" aria-hidden="true">◆</span><span>AFTERIMAGE.EXE <span class="brand-muted">// MEMORY RECOVERY UNIT</span></span></div>
+      <div class="online"><span id="model-dot" class="status-dot"></span><span id="model-status">CHECKING LOCAL SIGNAL</span></div>
+    </header>
+
+    <section id="boot-screen" class="hero" aria-labelledby="hero-title" aria-live="polite">
+      <div>
+        <p class="eyebrow">GHOST IN THE MACHINE / MEMORY RECOVERY PROTOCOL</p>
+        <h1 id="hero-title">Some things refuse <span>to stay lost.</span></h1>
+        <p class="intro">Feed the machine a few fragments. Let <b>Gemma</b> imagine the rest. A memory-shaped story, reconstructed from the things you still remember.</p>
+        <button id="enter-button" class="primary hero-button" type="button">ENTER MEMORY BANK <b>→</b></button>
+      </div>
+      <div class="ghoststage" role="img" aria-label="Decorative pixel ghost">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="ghost" aria-hidden="true"></div>
+        <div class="ghostlabel">UNIDENTIFIED SIGNAL DETECTED</div>
+      </div>
+    </section>
+
+    <section id="reconstruct-screen" class="hidden" aria-labelledby="input-title">
+      <div class="workspace">
+        <form id="memory-form" class="panel input-panel" novalidate>
+          <div class="panelhead"><div class="paneltitle" id="input-title">▸ MEMORY FRAGMENTS</div><span class="subindex">INPUT_01 / 15</span></div>
+          <div class="body">
+            <div class="label"><label for="fragments">Fragments from the past</label><small>UP TO 15 SHORT DETAILS</small></div>
+            <textarea id="fragments" maxlength="2200" rows="8" placeholder="rain on the window&#10;a blue screen at midnight&#10;someone humming in the next room" aria-describedby="fragment-help"></textarea>
+            <div class="field-meta"><span id="fragment-help">One fragment per line. Start with a sound, image, place, or feeling.</span><span id="fragment-count">0 / 15</span><span id="char-count">0 / 2200</span></div>
+            <div class="examples"><span>TRY ONE:</span><button type="button" class="example-chip">rain on the window</button><button type="button" class="example-chip">a blue screen at midnight</button><button type="button" class="example-chip">someone humming nearby</button></div>
+
+            <div class="label moodlabel"><span>Choose the emotional signal</span><small>MOOD_FILTER</small></div>
+            <fieldset class="moods" aria-label="Choose memory mood">
+              <legend class="sr-only">Choose the emotional signal</legend>
+              <label class="mood"><input type="radio" name="tone" value="nostalgic" checked><span class="symbol" aria-hidden="true">☼</span><span>Nostalgic</span></label>
+              <label class="mood"><input type="radio" name="tone" value="eerie"><span class="symbol" aria-hidden="true">◉</span><span>Eerie</span></label>
+              <label class="mood"><input type="radio" name="tone" value="hopeful"><span class="symbol" aria-hidden="true">✧</span><span>Hopeful</span></label>
+            </fieldset>
+
+            <p id="form-message" class="notice" role="alert"></p>
+            <button id="reconstruct-button" class="primary" type="submit">◈ &nbsp; RECONSTRUCT MEMORY &nbsp; →</button>
+            <p class="privacy"><b>◆</b> LOCAL AI · YOUR FRAGMENTS STAY YOURS</p>
+
+            <div id="loading-state" class="loading-state hidden" role="status" aria-live="polite">
+              <div class="loading-ghost ghost" aria-hidden="true"></div>
+              <div><strong>REASSEMBLING MEMORY FRAGMENTS</strong><span id="loading-copy">Reading the afterimage...</span></div>
+              <div class="loading-meter"><span></span></div>
+            </div>
+          </div>
+        </form>
+
+        <section id="result-screen" class="panel output" aria-labelledby="result-title">
+          <div class="panelhead"><div class="paneltitle">✳ RECOVERED FRAGMENT</div><span class="signal">◉ SIGNAL STABLE</span></div>
+          <div class="body">
+            <div class="tags"><span class="tag" id="result-code">FRAGMENT_001</span><span class="tag" id="result-tone">MOOD: NOSTALGIC</span><span class="tag model" id="result-source">GEMMA / LOCAL MODEL</span></div>
+            <h2 id="result-title">Something came back.</h2>
+            <div id="empty-state" class="empty-state" aria-live="polite"><div class="empty-signal" aria-hidden="true">✦</div><strong>AWAITING MEMORY FRAGMENTS</strong><span>Your reconstructed memory will appear here.</span></div>
+            <div id="memory-output" class="story hidden" aria-live="polite"></div>
+            <div class="result-meta"><span id="result-fragments">0 FRAGMENTS USED</span><span>AI-GENERATED CREATIVE RECONSTRUCTION</span></div>
+            <p id="result-message" class="result-message">Shaped from your fragments, not a verified factual memory.</p>
+            <div class="actions"><button id="copy-button" class="secondary" type="button">▣ &nbsp; COPY MEMORY</button><button id="download-button" class="secondary" type="button">↓ &nbsp; SAVE .TXT</button><button id="again-button" class="secondary" type="button">↺ &nbsp; START AGAIN</button></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer class="footer"><span><b>OPEN SOURCE</b> // LOCAL AI // HUMAN MEMORY, MACHINE IMAGINATION</span><button id="about-button" type="button">HOW IT WORKS</button></footer>
+  </main>
+
+  <dialog id="about-dialog" aria-labelledby="about-title"><button id="about-close" class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="eyebrow">SYSTEM NOTE</p><h2 id="about-title">Local reconstruction</h2><p>When Ollama is running, the Flask server sends your bounded fragments and selected tone to Gemma 3 1B. The model returns prose only; your fragments are not sent to a cloud service by this app.</p><p>If Ollama is unavailable, generation fails honestly and the form remains available for retry.</p></dialog>
+  <script src="{{ url_for('static', filename='afterimage.js', v='afterimage-reference-1') }}"></script>
+</body>
+</html>
